@@ -10,7 +10,7 @@ import spMysql from 'sp-mysql'
 import spModel from 'sp-model'
 
 class User extends spModel {
-    _table = 'dt_user'
+    _table = 'dt_user' // 如果想用下面的方法，表名必须指定
 }
 
 const mysql = new spMysql(config.mysql)

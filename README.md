@@ -55,3 +55,23 @@ let deleteAffectedRows = userDao.deleteById(1)
 // let deleteAffectedRows = userDao.deleteFakeById(1)
 let isSuccess = deleteAffectedRows > 0
 ```
+
+说明：为了统一单对象返回，自定义查询可以使用```returnOne(result)```处理。
+```js
+import spMysql from 'sp-mysql'
+import spModel from 'sp-model'
+
+export default class News extends spModel {
+    _table = 'dt_news'
+
+    async getMyNews(id) {
+        let sql = `SELECT * FROM dt_news WHERE id = ${id}`
+        let [result] = await this.mysql.query(sql)
+        return this.returnOne(result)
+    }
+}
+
+const mysql = new spMysql(config.mysql)
+const newsDao = new News()
+newsDao.getMyNews(1) // => news object | null
+```

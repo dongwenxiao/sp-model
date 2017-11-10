@@ -1,6 +1,6 @@
 /* 
 必备字段
-id, create_time, update_time 
+id, create_time(INT), update_time(INT)
 */
 
 export default class spModel {
@@ -29,9 +29,7 @@ export default class spModel {
 
         let [result] = await this.mysql.query(sql)
 
-        if (result && result.length > 0)
-            return result[0]
-        return null
+        return this.returnOne(result)
     }
 
     async getAll(skip, limit, cols = '*') {
@@ -95,51 +93,11 @@ export default class spModel {
         return result.affectedRows
     }
 
-    string2timestamp(time) {
-
-        let _time
-
-        if (time) {
-            _time = new Date(time)
-        } else {
-            _time = new Date()
-        }
-
-        return Math.round(_time / 1000)
-    }
-
-    timestamp2string(timestamp) {
-
-        if (("" + timestamp).length === 10)
-            timestamp *= 1000
-
-        let _time = new Date(timestamp)
-
-        let year = _time.getFullYear()
-        let month = _time.getMonth() + 1
-        let date = _time.getDate()
-        let hour = this._char(_time.getHours())
-        let minute = this._char(_time.getMinutes())
-        let second = this._char(_time.getSeconds())
-
-        return `${year}-${month}-${date} ${hour}:${minute}:${second}`
-    }
-
-    /* 字符补齐 */
-    _char(num, count = 2) {
-
-        num += ""
-
-        if (num.length < count) {
-            let _0count = count - num.length
-            for (let i = 0; i < _0count; i++) {
-                num = "0" + num
-            }
-        }
-
-        return num
-    }
-
+    /**
+     * 在数组中返回1个对象
+     * 此方法目的是同一格式，当返回1个对象时候，或是此对象，或是null
+     * @param {*} result 
+     */
     returnOne(result) {
         if (result.length > 0)
             return result[0]

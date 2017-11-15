@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 /* 
 必备字段
 id, create_time(INT), update_time(INT)
@@ -50,8 +52,8 @@ export default class spModel {
     */
     async create(obj) {
 
-        obj.create_time = this.string2timestamp()
-        obj.update_time = this.string2timestamp()
+        obj.create_time = moment().format('X')
+        obj.update_time = obj.create_time
 
         let sql = `INSERT INTO ${this.table} set ?`
 
@@ -66,7 +68,7 @@ export default class spModel {
 
     async updateById(id, obj) {
 
-        obj.update_time = this.string2timestamp()
+        obj.update_time = moment().format('X')
 
         let sql = `UPDATE ${this.table} set ? WHERE id = '${id}'`
 

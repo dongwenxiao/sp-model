@@ -30,6 +30,9 @@ const userDao = new User(mysql)
 let one = userDao.getOneById(1) // 获取ID是1的用户全部数据
 let one1 = userDao.getOneById(1, 'name,age') // 获取ID是1的用户的姓名和年龄数据
 
+// getLastOne(cols = '*')
+let one2 = getLastOne() // 获取最新的1条记录
+
 // getAll(skip, limit, cols = '*')
 // => []
 

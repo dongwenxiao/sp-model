@@ -34,6 +34,16 @@ export default class spModel {
         return this.returnOne(result)
     }
 
+
+    async getLastOne(cols = '*') {
+
+        let sql = `SELECT ${cols} FROM ${this.table} ORDER BY create_time DESC LIMIT 0, 1`
+
+        let [result] = await this.mysql.query(sql)
+
+        return this.returnOne(result)
+    }
+
     async getAll(skip, limit, cols = '*') {
 
         skip = skip ? skip : 0

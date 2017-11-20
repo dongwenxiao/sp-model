@@ -1,6 +1,6 @@
 {
     "name": "sp-model",
-    "version": "2.4.0",
+    "version": "2.5.0",
     "description": "super-project moudle for base dao operate, base on sp-mysql.",
     "main": "index.js",
     "scripts": {

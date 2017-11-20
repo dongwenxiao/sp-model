@@ -8,7 +8,7 @@ id, create_time(INT), update_time(INT)
 export default class spModel {
 
     /* 
-        需要在子类中手动添加属性 table，作为表名
+        需要在子类中手动添加属性 _table，作为表名
     */
     // table: 'dt_user'
 
